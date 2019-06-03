@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+	Options -Indexes
+
+	Options +FollowSymLinks -MultiViews
+	
+	# Generic 404 to show the "custom_404.html" page
+	# If the requested page is not a file or directory
+	# Silent Redirect: the user's URL bar is unchanged.
+	RewriteEngine on
+	
+	
+
+	# Always remove www (with a hard redirect)
+	# RewriteCond %{HTTP_HOST} ^www\.example\.com$ [NC]
+	# RewriteRule ^(.*)$ http://example.com/$1 [R=301,L]
+  
+	#Remove the .php extension
+	RewriteCond %{REQUEST_FILENAME}.php -f
+	RewriteRule ^(.*)$ $1.php [NC,L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule .* error.php [L]
+	
+	
+	
+</IfModule>
